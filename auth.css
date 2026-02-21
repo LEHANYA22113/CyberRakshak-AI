@@ -1,0 +1,27 @@
+/* Auth specific - already integrated in main.css, kept for modularity */
+body {
+  background: #0b0f1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+}
+.auth-box {
+  background: rgba(255,255,255,0.05);
+  padding: 30px;
+  width: 320px;
+  border-radius: 16px;
+}
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+button {
+  background: #38bdf8;
+  border: none;
+}
+.error {
+  color: red;
+}

@@ -1,0 +1,120 @@
+/* ========== ADDITIONS FOR FILE PREVIEW ========== */
+
+/* Preview container */
+.file-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+    min-height: 60px;
+    width: 100%;
+}
+
+/* Individual preview item */
+.preview-item {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #38bdf8;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #020617;
+}
+
+.preview-item img,
+.preview-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Remove button */
+.preview-item .remove-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    z-index: 10;
+}
+
+.preview-item .remove-btn:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+/* Disabled analyze button state (already exists but ensure consistency) */
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+/* Ensure gauge and meter styles are present */
+.gauge-container {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.gauge {
+    width: 160px;
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 80px 80px 0 0;
+    background: #1e293b;
+    border: 1px solid #334155;
+}
+
+.gauge-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(0deg, #ef4444, #f87171);
+    transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gauge-fill[style*="height: 0"] { background: linear-gradient(0deg, #22c55e, #4ade80); }
+.gauge-fill[style*="height: 1"] { background: linear-gradient(0deg, #facc15, #fde047); }
+
+.probability-value {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.confidence-meter {
+    margin-top: 20px;
+}
+
+.meter-bar {
+    width: 100%;
+    height: 12px;
+    background: #1e293b;
+    border-radius: 20px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+.meter-fill {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.8s ease;
+}
+
+.meter-fill.high { background: linear-gradient(90deg, #ef4444, #dc2626); }
+.meter-fill.medium { background: linear-gradient(90deg, #facc15, #eab308); }
+.meter-fill.low { background: linear-gradient(90deg, #22c55e, #16a34a); }

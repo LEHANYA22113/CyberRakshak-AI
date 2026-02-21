@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Detection | CyberRakshak AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/phishing.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glow-blue">🎣 Phishing Analyzer</span>
+        </div>
+        <div class="nav-user">
+            <a href="{{ url_for('dashboard') }}" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="module-container">
+        <!-- Input Card -->
+        <div class="input-card glass large">
+            <div class="card-icon">
+                <i class="fas fa-shield-haltered"></i>
+            </div>
+            <h3>Analyze Message / URL</h3>
+            <p>Paste email, SMS, WhatsApp message, or URL to detect phishing threats</p>
+            <textarea id="phishing-input" placeholder="Example: Urgent! Verify your bank account immediately at http://fake-link.com"></textarea>
+            <button class="btn-primary" onclick="analyzePhishing()">
+                <i class="fas fa-search"></i> Scan for Threats
+            </button>
+        </div>
+
+        <!-- Result Panel -->
+        <div id="phishing-result" class="result-panel glass" style="display:none;"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/phishing.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/fingerprint.js') }}"></script>
+</body>
+</html>

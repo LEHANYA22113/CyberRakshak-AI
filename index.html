@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberRakshak AI – AI Cyber Defense</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#38bdf8">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">🛡 CyberRakshak AI</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#modules">Modules</a>
+            <a href="#impact">Impact</a>
+            <a href="{{ url_for('login') }}" class="btn-login">Login</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Defending Digital Trust with AI</h1>
+            <p>CyberRakshak AI is an intelligent cyber‑defense platform that detects deepfake media and phishing attacks in real time to protect people, identities, and digital ecosystems.</p>
+            <div class="hero-buttons">
+                <a href="{{ url_for('register') }}" class="btn-primary">Get Started</a>
+                <a href="#modules" class="btn-secondary">Explore</a>
+            </div>
+        </div>
+        <div class="hero-glow"></div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>Why CyberRakshak AI?</h2>
+        <p class="section-text">With the rise of deepfakes and online scams, digital trust is collapsing. CyberRakshak AI restores that trust using transparent, real‑time AI systems built completely from scratch.</p>
+    </section>
+
+    <section id="modules" class="section dark-section">
+        <h2>Core Security Modules</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>🧠 DefendFace</h3>
+                <p>Detects deepfake faces using a hybrid CNN + LSTM model. Supports live camera, image, and video analysis.</p>
+            </div>
+            <div class="card">
+                <h3>🎣 Phishing Detection</h3>
+                <p>Identifies malicious URLs, emails, and messages using machine‑learning based pattern analysis (TF‑IDF + Random Forest).</p>
+            </div>
+            <div class="card">
+                <h3>🤖 AI Assistant</h3>
+                <p>Multilingual AI chatbot that spreads cyber awareness and guides users during suspicious situations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="section">
+        <h2>Social & Economic Impact</h2>
+        <p class="section-text">CyberRakshak AI reduces financial fraud, prevents identity misuse, empowers both men and women, and aligns with Digital India and national cyber‑safety initiatives.</p>
+        <div class="qr-section">
+            <h3>Use on Mobile</h3>
+            <p>Scan this QR code while connected to the same Wi‑Fi</p>
+            <img src="{{ url_for('static', filename='qr/app_qr.png') }}" width="180">
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 CyberRakshak AI · Built for a Safer Digital India</p>
+    </footer>
+
+    <!-- Chatbot floating button -->
+    <div class="chatbot-fab" onclick="toggleChatbot()">🤖</div>
+   <!-- Chatbot Container -->
+<div class="chatbot-container" id="chatbotContainer" style="display:none;">
+    <div class="chatbot-header">
+        <span>🤖 CyberRakshak AI Assistant</span>
+        <button onclick="toggleChatbot()">✕</button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+        <!-- Messages will appear here -->
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="chatInput" placeholder="Type your message...">
+        <button id="micButton" onclick="startVoiceInput()" title="Click to speak">🎤</button>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/fingerprint.js') }}"></script>
+
+
+    
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>

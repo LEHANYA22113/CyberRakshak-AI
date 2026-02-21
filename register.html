@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register | CyberRakshak AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="login-bg"></div>
+    <div class="login-terminal">
+        <h2 class="glow-blue">CREATE ACCOUNT</h2>
+        <p class="muted">Join CyberRakshak AI</p>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+        
+        <!-- This submits to Flask, NOT JavaScript -->
+        <form method="POST" action="{{ url_for('register') }}">
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <button class="btn full">Register</button>
+        </form>
+
+        <div class="divider"></div>
+        
+        <p>Already have an account? <a href="{{ url_for('login') }}" style="color:#38bdf8;">Login</a></p>
+    </div>
+</body>
+</html>

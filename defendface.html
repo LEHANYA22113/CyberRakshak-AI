@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DefendFace | CyberRakshak AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/defendface.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glow-blue">🧠 DefendFace</span>
+        </div>
+        <div class="nav-user">
+            <a href="{{ url_for('dashboard') }}" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="module-container">
+        <!-- Input Cards -->
+        <div class="input-grid">
+            <!-- Image Analysis Card -->
+            <div class="input-card glass">
+                <div class="card-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h3>Image Analysis</h3>
+                <p>Upload an image for deepfake detection</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="imageInput" accept="image/*">
+                    <label for="imageInput" class="btn-file">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose Image
+                    </label>
+                </div>
+                <!-- Preview container for image -->
+                <div class="file-preview" id="imagePreview"></div>
+                <button class="btn-primary" onclick="analyzeImage()" id="analyzeImageBtn" disabled>
+                    <i class="fas fa-microchip"></i> Analyze
+                </button>
+            </div>
+
+            <!-- Video Analysis Card -->
+            <div class="input-card glass">
+                <div class="card-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3>Video Analysis</h3>
+                <p>Upload a video for deepfake detection</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="videoInput" accept="video/*">
+                    <label for="videoInput" class="btn-file">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose Video
+                    </label>
+                </div>
+                <!-- Preview container for video -->
+                <div class="file-preview" id="videoPreview"></div>
+                <button class="btn-primary" onclick="analyzeVideo()" id="analyzeVideoBtn" disabled>
+                    <i class="fas fa-microchip"></i> Analyze
+                </button>
+            </div>
+
+            <!-- Live Camera Card -->
+            <div class="input-card glass live-card">
+                <div class="card-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Live Camera</h3>
+                <p>Real‑time deepfake scanning</p>
+                <div class="camera-preview">
+                    <video id="camera" autoplay></video>
+                </div>
+                <div class="camera-controls">
+                    <button class="btn-secondary" onclick="startCamera()">
+                        <i class="fas fa-play"></i> Start
+                    </button>
+                    <button class="btn-primary" onclick="captureAndAnalyze()">
+                        <i class="fas fa-camera"></i> Capture
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div id="resultPanel" class="result-panel glass" style="display:none;">
+            <div class="result-header">
+                <h3><i class="fas fa-flask"></i> Analysis Result</h3>
+                <span class="result-badge" id="resultBadge">Processing</span>
+            </div>
+            <div id="resultContent" class="result-content"></div>
+            <div class="result-actions">
+                <button class="btn-outline" onclick="downloadReport()">
+                    <i class="fas fa-download"></i> Download Report
+                </button>
+                <button class="btn-outline" onclick="emailReport()">
+                    <i class="fas fa-envelope"></i> Email Report
+                </button>
+            </div>
+        </div>
+
+        <!-- Info Card -->
+        <div class="info-card glass">
+            <div class="info-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="info-content">
+                <h4>How DefendFace Works</h4>
+                <p>Our hybrid CNN + LSTM model analyzes spatial features and temporal inconsistencies across video frames to detect deepfake artifacts with 94.7% accuracy on FaceForensics++.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/defendface.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/fingerprint.js') }}"></script>
+</body>
+</html>

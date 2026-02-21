@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | CyberRakshak AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glow-blue">🛡 CyberRakshak AI</span>
+        </div>
+        <div class="nav-user">
+            <span class="user-email">{{ current_user.email }}</span>
+            <a href="{{ url_for('logout') }}" class="btn-logout">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card glass">
+                <div class="stat-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Total Analyses</h3>
+                    <p class="stat-value" id="total-analyses">0</p>
+                    <span class="stat-label">Lifetime scans</span>
+                </div>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-icon">
+                    <i class="fas fa-face-smile"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>DefendFace</h3>
+                    <p class="stat-value" id="defendface-count">0</p>
+                    <span class="stat-label">Deepfake scans</span>
+                </div>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-icon">
+                    <i class="fas fa-fish"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Phishing</h3>
+                    <p class="stat-value" id="phishing-count">0</p>
+                    <span class="stat-label">Threat analyses</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Action Cards (including new ones) -->
+        <div class="quick-actions">
+            <a href="{{ url_for('defendface') }}" class="action-card glass">
+                <i class="fas fa-camera-retro"></i>
+                <h4>DefendFace</h4>
+                <p>Detect deepfakes with AI</p>
+                <span class="action-arrow">→</span>
+            </a>
+            <a href="{{ url_for('phishing') }}" class="action-card glass">
+                <i class="fas fa-envelope"></i>
+                <h4>Phishing Analysis</h4>
+                <p>Scan URLs & messages</p>
+                <span class="action-arrow">→</span>
+            </a>
+
+            <!-- Simulate Threat (for demo) -->
+            <div class="action-card glass" onclick="simulateThreat()" style="cursor: pointer; border-color: #ef4444;">
+                <i class="fas fa-bug" style="color: #ef4444;"></i>
+                <h4>Simulate Threat</h4>
+                <p>Test tracking & NCRP report</p>
+                <span class="action-arrow">→</span>
+            </div>
+
+            <!-- Threat Sources Link -->
+            <a href="/threat-sources" class="action-card glass" style="border-color: #8b5cf6;">
+                <i class="fas fa-shield-alt" style="color: #8b5cf6;"></i>
+                <h4>Threat Sources</h4>
+                <p>View tracked devices & NCRP reports</p>
+                <span class="action-arrow">→</span>
+            </a>
+        </div>
+        <a href="/women-safety" class="action-card glass" style="border-color: #ff6b6b;">
+    <i class="fas fa-fist-raised" style="color: #ff6b6b;"></i>
+    <h4>Narishakthi Initiative</h4>
+    <p>Women safety resources, SOS, & support</p>
+    <span class="action-arrow">→</span>
+</a>
+
+        <!-- Dashboard Panels (Chart & Timeline) -->
+        <div class="dashboard-panels">
+            <div class="panel glass">
+                <div class="panel-header">
+                    <h3><i class="fas fa-chart-line"></i> Threat Trend (Last 7 Days)</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="threatChart"></canvas>
+                </div>
+            </div>
+
+            <div class="panel glass">
+                <div class="panel-header">
+                    <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="timeline" id="activity-timeline"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer" style="display:none;">
+        <div class="chatbot-header">
+            <span>🤖 CyberRakshak AI Assistant</span>
+            <button onclick="toggleChatbot()">✕</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button id="micButton" onclick="startVoiceInput()" title="Click to speak">🎤</button>
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <div class="chatbot-fab" onclick="toggleChatbot()">
+        🤖
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/fingerprint.js') }}"></script>
+
+    <!-- Simulate Threat Function -->
+    <script>
+        async function simulateThreat() {
+            if (!window.cyberFingerprint) {
+                alert('Fingerprint not ready. Please refresh.');
+                return;
+            }
+            await window.cyberFingerprint.generateFingerprint();
+            const result = await window.cyberFingerprint.trackEvent('deepfake_detected', {
+                probability: 0.98,
+                filename: 'demo_simulation'
+            });
+            if (result && result.ncrp_report) {
+                alert(`✅ Threat simulated!\nNCRP Case: ${result.ncrp_report.case_id}`);
+            } else {
+                alert('Threat simulated. Check Threat Sources page.');
+            }
+        }
+    </script>
+</body>
+</html>

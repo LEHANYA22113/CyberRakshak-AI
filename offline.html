@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - CyberRakshak AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .offline-card {
+            background: rgba(15,25,35,0.9);
+            border: 2px solid #38bdf8;
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 400px;
+        }
+        .offline-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background: #38bdf8;
+            color: black;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-card">
+        <div class="offline-icon">📡</div>
+        <h1>You're Offline</h1>
+        <p>Please check your internet connection. The app will automatically reconnect when you're back online.</p>
+        <button class="btn" onclick="window.location.reload()">Retry</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/fingerprint.js') }}"></script>
+</body>
+</html>
